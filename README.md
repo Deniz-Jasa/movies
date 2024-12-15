@@ -2,7 +2,7 @@
 
 A movie and series streaming website.
 
-live @ [https://fakeflix-two.vercel.app](https://fakeflix-two.vercel.app)
+Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
 
 
 ![Fakeflix __ · 1 39pm · 12-15](https://github.com/user-attachments/assets/2601792d-624e-460a-a1bf-2c4e7345bc14)
