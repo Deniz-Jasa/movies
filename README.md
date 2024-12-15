@@ -1,6 +1,8 @@
-# CineGeek 2.0 beta
+# Fakeflix
 
 A movie and series streaming website.
+
+![Fakeflix __](https://github.com/user-attachments/assets/acb5d31c-3370-4a2b-85e4-127f1de97930)
 
 ## Features
 
@@ -26,24 +28,6 @@ A movie and series streaming website.
 4. Create .env file cp .env.example .env
 5. Start the development server: npm run dev
 
-
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/improvement`).
-3. Make your changes.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature/improvement`).
-6. Create a new Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgements
 
-- The Movie Database (TMDb) for providing the movie data through their API.
-- Vidsrc.to for providing the movie streaming links.
----
+- Forked from https://github.com/dragonpilee/cinegeek-beta
