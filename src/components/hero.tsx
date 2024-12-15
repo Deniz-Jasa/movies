@@ -78,11 +78,11 @@ const Hero = ({ shows }: HeroProps) => {
             />
             <div className="absolute bottom-0 left-0 right-0 top-0">
               <div className="absolute bottom-[35%] left-[4%] top-0 z-10 flex w-[36%] flex-col justify-end space-y-2">
-                <h1 className="text-[6vw] sm:text-[4vw] md:text-[3vw] lg:text-[2vw] font-bold">
+                <h1 className="text-[6vw] sm:text-[4vw] md:text-[3vw] lg:text-[3vw] font-bold">
                   {randomShow?.title ?? randomShow?.name}
                 </h1>
 
-                <div className="flex space-x-2 text-[2.5vw] font-semibold md:text-[0.8vw]">
+                <div className="flex space-x-2 text-[2.5vw] font-semibold md:text-[1.2vw]">
                   <p className="text-green-600">
                     {Math.round(randomShow?.vote_average * 10) ?? '-'}% Match
                   </p>
@@ -90,7 +90,7 @@ const Hero = ({ shows }: HeroProps) => {
                   <p>{randomShow?.release_date ?? '-'}</p>
                 </div>
                 {/* <p className="line-clamp-4 text-sm text-gray-300 md:text-base"> */}
-                <p className="hidden text-[1.2vw] sm:line-clamp-3">
+                <p className="hidden text-[1.7vw] sm:line-clamp-3">
                   {randomShow?.overview ?? '-'}
                 </p>
                 <div className="mt-[1.5vw] flex items-center space-x-2">

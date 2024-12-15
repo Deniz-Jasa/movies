@@ -87,7 +87,7 @@ export function MainNav({ items }: MainNavProps) {
       // If the search value is empty, reset the search results and navigate to home
       searchStore.setQuery(''); // Clear the search query
       searchStore.setShows([]); // Clear the search results
-  
+
       // Redirect to home if currently on search page
       if (path === '/search') {
         router.push('/home');
@@ -96,29 +96,29 @@ export function MainNav({ items }: MainNavProps) {
       }
       return;
     }
-  
+
     // Update the search query in the URL
     if (getSearchValue('q')?.trim()?.length) {
       window.history.replaceState(null, '', `search?q=${value}`);
     } else {
       window.history.pushState(null, '', `search?q=${value}`);
     }
-  
+
     // Set the query and show the loading indicator
     searchStore.setQuery(value);
     searchStore.setLoading(true);
-  
+
     // Fetch the search results
     const shows = await MovieService.searchMovies(value);
     searchStore.setLoading(false);
     searchStore.setShows(shows.results);
-  
+
     // Smooth scroll to the top of the page
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
-  
+
 
   // change background color on scroll
   React.useEffect(() => {
@@ -153,13 +153,19 @@ export function MainNav({ items }: MainNavProps) {
           href="/home"
           className="hidden md:block"
           onClick={() => handleChangeStatusOpen(false)}>
-          <div className="">
+          <div className="flex items-center gap-4">
+            <Image
+              src={LogoIcon}
+              alt="Logo"
+              className="w-9"
+            />
             <Image
               src={Logo}
               alt="Logo"
               className="w-20"
             />
           </div>
+
         </Link>
         {items?.length ? (
           <nav className="hidden gap-6 md:flex">
