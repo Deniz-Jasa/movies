@@ -3,7 +3,7 @@
 # Fakeflix
 
 
-A movie and series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. 
+A movie and TV series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. 
 
 Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
 
