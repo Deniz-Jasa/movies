@@ -2,10 +2,10 @@ import { getNameFromShow, getSlug } from '@/lib/utils';
 import type {
   CategorizedShows,
   KeyWordResponse,
-  MediaType,
   Show,
   ShowWithGenreAndVideo,
 } from '@/types';
+import { MediaType } from '@/types';
 import { type AxiosResponse } from 'axios';
 import BaseService from '../BaseService/BaseService';
 import {
@@ -25,6 +25,26 @@ const requestTypesNeedUpdateMediaType = [
   RequestType.KOREAN,
 ];
 const baseUrl = 'https://api.themoviedb.org/3';
+
+type FavoriteItem = {
+  id: number;
+  mediaType: 'movie' | 'tv';
+};
+
+const FAVOURITES: FavoriteItem[] = [
+  { id: 76331, mediaType: 'tv' },      // Succession
+  { id: 652, mediaType: 'movie' },     // Troy
+  { id: 238, mediaType: 'movie' },    // The Godfather
+  { id: 278, mediaType: 'movie' },    // Shawshank Redemption
+  { id: 550, mediaType: 'movie' },    // Fight Club
+  { id: 680, mediaType: 'movie' },    // Pulp Fiction
+  { id: 155, mediaType: 'movie' },    // The Dark Knight
+  { id: 13, mediaType: 'movie' },     // Forrest Gump
+  { id: 27205, mediaType: 'movie' },  // Inception
+  { id: 299536, mediaType: 'movie' }, // Infinity War
+  { id: 157336, mediaType: 'movie' }, // Interstellar
+  { id: 244786, mediaType: 'movie' }, // Whiplash
+];
 
 class MovieService extends BaseService {
   static async findCurrentMovie(id: number, pathname: string): Promise<Show> {
@@ -74,6 +94,8 @@ class MovieService extends BaseService {
 
   static urlBuilder(req: TmdbRequest) {
     switch (req.requestType) {
+      case RequestType.FAVOURITE:
+        return `/movie/${FAVOURITES[0]}?language=en-US`;
       case RequestType.TRENDING:
         return `/trending/${
           req.mediaType
@@ -111,11 +133,39 @@ class MovieService extends BaseService {
     }
   }
 
+  static async getFavoriteShows() {
+    const promises = FAVOURITES.map(({ id, mediaType }) => 
+      mediaType === 'movie' ? this.findMovie(id) : this.findTvSeries(id)
+    );
+    
+    const responses = await Promise.allSettled(promises);
+    return responses
+      .filter(this.isFulfilled)
+      .map(res => {
+        const show = res.value.data;
+        show.media_type = show.first_air_date ? MediaType.TV : MediaType.MOVIE;
+        return show;
+      });
+  }
+
   static executeRequest(req: {
     requestType: RequestType;
     mediaType: MediaType;
     page?: number;
   }) {
+    if (req.requestType === RequestType.FAVOURITE) {
+      return new Promise<AxiosResponse<TmdbPagingResponse>>(async (resolve) => {
+        const favoriteShows = await this.getFavoriteShows();
+        resolve({
+          data: {
+            results: favoriteShows,
+            page: 1,
+            totalPages: 1,
+            totalResults: favoriteShows.length
+          }
+        } as AxiosResponse<TmdbPagingResponse>);
+      });
+    }
     return this.axios(baseUrl).get<TmdbPagingResponse>(this.urlBuilder(req));
   }
 

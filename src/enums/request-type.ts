@@ -2,6 +2,7 @@ import { type MediaType, type Show } from '@/types';
 import { type Genre } from './genre';
 
 export enum RequestType {
+  FAVOURITE = 'favourite',
   TRENDING = 'trending',
   TOP_RATED = 'top_rated',
   NETFLIX = 'netflix',

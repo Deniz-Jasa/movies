@@ -1,4 +1,5 @@
 import Hero from '@/components/hero';
+import SiteHeader from '@/components/main/site-header';
 import ShowsContainer from '@/components/shows-container';
 import { siteConfig } from '@/configs/site';
 import { RequestType, type ShowRequest } from '@/enums/request-type';
@@ -40,6 +41,7 @@ export default async function NewAndPopularPage() {
 
   return (
     <>
+      <SiteHeader />
       <h1 className="hidden">{h1}</h1>
       <Hero shows={allShows[0].shows} />
       <ShowsContainer shows={allShows} />

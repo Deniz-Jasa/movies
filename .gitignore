@@ -1,0 +1,37 @@
+# Node.js dependencies
+node_modules/
+
+# Next.js build output
+.next/
+
+# .env files
+.env*
+!.env.local
+!.env.development.local
+!.env.test.local
+!.env.production.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+
+# Local configuration files
+*.local
+
+# Next.js public directory (if you don't want to include it in Git)
+public/
+
+# Static files (such as images, etc.)
+static/

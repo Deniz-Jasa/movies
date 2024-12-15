@@ -113,7 +113,7 @@ const ShowModal = () => {
     if (!modalStore.show || modalStore.firstLoad) {
       window.history.pushState(null, '', '/home');
     } else {
-      window.history.back();
+      window.history.pushState(null, '', '/home');
     }
   };
 

@@ -1,10 +1,12 @@
 import Hero from '@/components/hero';
+import SiteHeader from '@/components/main/site-header';
 import ShowsContainer from '@/components/shows-container';
 import { siteConfig } from '@/configs/site';
 import { Genre } from '@/enums/genre';
 import { RequestType, type ShowRequest } from '@/enums/request-type';
 import MovieService from '@/services/MovieService';
 import { MediaType } from '@/types';
+
 
 export const revalidate = 3600;
 
@@ -71,6 +73,7 @@ export default async function TvShowPage() {
 
   return (
     <>
+      <SiteHeader />
       <h1 className="hidden">{h1}</h1>
       <Hero shows={allShows[0].shows} />
       <ShowsContainer shows={allShows} />
