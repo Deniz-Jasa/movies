@@ -26,6 +26,7 @@ import { ModeToggle as ThemeToggle } from '@/components/theme-toggle';
 import { DebouncedInput } from '@/components/debounced-input';
 import MovieService from '@/services/MovieService';
 import Logo from '../../app/logo.png';
+import LogoIcon from '../../app/logo-icon.png';
 import Image from 'next/image';
 
 interface MainNavProps {
@@ -130,7 +131,7 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <nav
       className={cn(
-        'relative flex h-12 w-full items-center justify-between bg-gradient-to-b from-secondary/70 from-10% px-[4vw] transition-colors duration-300 md:sticky md:h-16',
+        'relative flex h-16 w-full items-center justify-between bg-gradient-to-b from-secondary/70 from-10% px-[4vw] transition-colors duration-300 md:sticky',
         isScrolled ? 'bg-black/70 shadow-md backdrop-blur-xl backdrop-saturate-300' : 'bg-transparent',
       )}>
       <div className="flex items-center gap-6 md:gap-10">
@@ -138,11 +139,11 @@ export function MainNav({ items }: MainNavProps) {
           href="/home"
           className="hidden md:block"
           onClick={() => handleChangeStatusOpen(false)}>
-          <div className="flex items-center space-x-2">
+          <div className="">
             <Image
               src={Logo}
               alt="Logo"
-              className="w-[15%]"
+              className="w-20"
             />
           </div>
         </Link>
@@ -167,28 +168,24 @@ export function MainNav({ items }: MainNavProps) {
           </nav>
         ) : null}
         <div className="block md:hidden">
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
+              <Image
+                src={LogoIcon}
+                alt="Logo"
+                className="w-8"
+              />
+              {/* <Button
                 variant="ghost"
                 className="flex items-center space-x-2 px-0 hover:bg-transparent focus:ring-0">
-                <Icons.logo className="h-6 w-6" />
                 <span className="text-base font-bold">Menu</span>
-              </Button>
+              </Button> */}
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="start"
               sideOffset={20}
               className="w-52 overflow-y-auto overflow-x-hidden rounded-sm">
-              <DropdownMenuLabel>
-                <Link
-                  href="/"
-                  className="flex items-center justify-center"
-                  onClick={() => handleChangeStatusOpen(false)}>
-                  <span className="">{siteConfig.name}</span>
-                </Link>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
               {items?.map((item, index) => (
                 <DropdownMenuItem key={index} asChild className="items-center justify-center">
                   {item.href && (
@@ -204,6 +201,11 @@ export function MainNav({ items }: MainNavProps) {
                   )}
                 </DropdownMenuItem>
               ))}
+
+              <ThemeToggle />
+              <Button variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -224,8 +226,10 @@ export function MainNav({ items }: MainNavProps) {
           className={cn(path === '/' ? 'flex' : 'hidden')}>
           <Icons.gitHub className="h-5 w-5 hover:bg-transparent" />
         </Link>
-        <ThemeToggle />
-        <Button variant="outline" onClick={handleLogout}>
+        <div className='hidden md:flex'>
+          <ThemeToggle />
+        </div>
+        <Button variant="outline" className='hidden md:flex' onClick={handleLogout}>
           Logout
         </Button>
       </div>
