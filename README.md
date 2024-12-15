@@ -1,4 +1,7 @@
+<img src="https://github.com/user-attachments/assets/f4791f7d-6411-4bec-9e78-e80ae1e38d76" alt="logo-icon" width="150" />
+
 # Fakeflix
+
 
 A movie and series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. 
 
