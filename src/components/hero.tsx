@@ -69,9 +69,8 @@ const Hero = ({ shows }: HeroProps) => {
         <>
           <div className="absolute inset-0 z-0 h-[100vw] w-full sm:h-[56.25vw]">
             <Image
-              src={`https://image.tmdb.org/t/p/original/${
-                randomShow?.backdrop_path ?? randomShow?.poster_path ?? ''
-              }`}
+              src={`https://image.tmdb.org/t/p/original/${randomShow?.backdrop_path ?? randomShow?.poster_path ?? ''
+                }`}
               alt={randomShow?.title ?? 'poster'}
               className="-z-40 h-auto w-full object-cover"
               fill
@@ -79,10 +78,11 @@ const Hero = ({ shows }: HeroProps) => {
             />
             <div className="absolute bottom-0 left-0 right-0 top-0">
               <div className="absolute bottom-[35%] left-[4%] top-0 z-10 flex w-[36%] flex-col justify-end space-y-2">
-                <h1 className="text-[3vw] font-bold">
+                <h1 className="text-[6vw] sm:text-[4vw] md:text-[3vw] lg:text-[2vw] font-bold">
                   {randomShow?.title ?? randomShow?.name}
                 </h1>
-                <div className="flex space-x-2 text-[2vw] font-semibold md:text-[1.2vw]">
+
+                <div className="flex space-x-2 text-[2.5vw] font-semibold md:text-[0.8vw]">
                   <p className="text-green-600">
                     {Math.round(randomShow?.vote_average * 10) ?? '-'}% Match
                   </p>
@@ -96,17 +96,16 @@ const Hero = ({ shows }: HeroProps) => {
                 <div className="mt-[1.5vw] flex items-center space-x-2">
                   <Link
                     prefetch={false}
-                    href={`/watch/${
-                      randomShow.media_type === MediaType.MOVIE ? 'movie' : 'tv'
-                    }/${randomShow.id}`}>
+                    href={`/watch/${randomShow.media_type === MediaType.MOVIE ? 'movie' : 'tv'
+                      }/${randomShow.id}`}>
                     <Button
                       aria-label="Play video"
                       className="h-auto flex-shrink-0 gap-2 rounded-xl"
-                      // onClick={() => {
-                      //   modalStore.setShow(randomShow);
-                      //   modalStore.setOpen(true);
-                      //   modalStore.setPlay(true);
-                      // }}
+                    // onClick={() => {
+                    //   modalStore.setShow(randomShow);
+                    //   modalStore.setOpen(true);
+                    //   modalStore.setPlay(true);
+                    // }}
                     >
                       <Icons.play className="fill-current" aria-hidden="true" />
                       Play

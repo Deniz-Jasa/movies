@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { type Show, type NavItem } from '@/types';
 import Link from 'next/link';
 import {
@@ -43,6 +43,9 @@ export function MainNav({ items }: MainNavProps) {
   // search store
   const searchStore = useSearchStore();
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   React.useEffect(() => {
     window.addEventListener('popstate', handlePopstateEvent, false);
@@ -81,30 +84,41 @@ export function MainNav({ items }: MainNavProps) {
 
   async function searchShowsByQuery(value: string) {
     if (!value?.trim()?.length) {
+      // If the search value is empty, reset the search results and navigate to home
+      searchStore.setQuery(''); // Clear the search query
+      searchStore.setShows([]); // Clear the search results
+  
+      // Redirect to home if currently on search page
       if (path === '/search') {
         router.push('/home');
       } else {
-        window.history.pushState(null, '', path);
+        window.history.pushState(null, '', '/home');
       }
       return;
     }
-
+  
+    // Update the search query in the URL
     if (getSearchValue('q')?.trim()?.length) {
       window.history.replaceState(null, '', `search?q=${value}`);
     } else {
       window.history.pushState(null, '', `search?q=${value}`);
     }
-
+  
+    // Set the query and show the loading indicator
     searchStore.setQuery(value);
     searchStore.setLoading(true);
+  
+    // Fetch the search results
     const shows = await MovieService.searchMovies(value);
     searchStore.setLoading(false);
-    void searchStore.setShows(shows.results);
-
+    searchStore.setShows(shows.results);
+  
+    // Smooth scroll to the top of the page
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
+  
 
   // change background color on scroll
   React.useEffect(() => {
@@ -131,7 +145,7 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <nav
       className={cn(
-        'relative flex h-16 w-full items-center justify-between bg-gradient-to-b from-secondary/70 from-10% px-[4vw] transition-colors duration-300 md:sticky',
+        'relative flex h-16 w-full items-center justify-between bg-gradient-to-b from-secondary/70 from-10% px-4 sm:px-6 md:px-[4vw] transition-colors duration-300 md:sticky',
         isScrolled ? 'bg-black/70 shadow-md backdrop-blur-xl backdrop-saturate-300' : 'bg-transparent',
       )}>
       <div className="flex items-center gap-6 md:gap-10">
@@ -171,28 +185,29 @@ export function MainNav({ items }: MainNavProps) {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Image
-                src={LogoIcon}
-                alt="Logo"
-                className="w-8"
-              />
-              {/* <Button
-                variant="ghost"
-                className="flex items-center space-x-2 px-0 hover:bg-transparent focus:ring-0">
-                <span className="text-base font-bold">Menu</span>
-              </Button> */}
+              <div className="flex items-center justify-between w-full">
+                {/* Logo on the left */}
+                <Link href="/home">
+                  <Image
+                    src={LogoIcon}
+                    alt="Logo"
+                    className="w-8 mr-3"
+                  />
+                </Link>
+
+              </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="start"
               sideOffset={20}
-              className="w-52 overflow-y-auto overflow-x-hidden rounded-sm">
+              className="w-full p-8 overflow-y-auto overflow-x-hidden rounded-sm">
               {items?.map((item, index) => (
                 <DropdownMenuItem key={index} asChild className="items-center justify-center">
                   {item.href && (
                     <Link href={item.href} onClick={() => handleChangeStatusOpen(false)}>
                       <span
                         className={cn(
-                          'line-clamp-1 text-foreground/60 hover:text-foreground/80',
+                          'line-clamp-1 text-foreground/60 hover:text-foreground/80 mb-5',
                           path === item.href && 'font-bold text-foreground',
                         )}>
                         {item.title}
@@ -202,15 +217,19 @@ export function MainNav({ items }: MainNavProps) {
                 </DropdownMenuItem>
               ))}
 
-              <ThemeToggle />
-              <Button variant="outline" onClick={handleLogout}>
-                Logout
-              </Button>
+              <div className="flex items-center gap-4">
+                <ThemeToggle />
+                <Button variant="outline" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
+
             </DropdownMenuContent>
           </DropdownMenu>
+
         </div>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center justify-between gap-4">
         <DebouncedInput
           id="search-input"
           open={searchStore.isOpen}
@@ -219,6 +238,7 @@ export function MainNav({ items }: MainNavProps) {
           onChangeStatusOpen={handleChangeStatusOpen}
           containerClassName={cn(path === '/' ? 'hidden' : 'flex')}
         />
+
         <Link
           rel="noreferrer"
           target="_blank"
@@ -226,15 +246,19 @@ export function MainNav({ items }: MainNavProps) {
           className={cn(path === '/' ? 'flex' : 'hidden')}>
           <Icons.gitHub className="h-5 w-5 hover:bg-transparent" />
         </Link>
-        <div className='hidden md:flex'>
+
+        <div className="hidden md:flex gap-4">
           <ThemeToggle />
+          <Button variant="outline" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
-        <Button variant="outline" className='hidden md:flex' onClick={handleLogout}>
-          Logout
-        </Button>
       </div>
+
     </nav>
   );
 }
 
 export default MainNav;
+
+
