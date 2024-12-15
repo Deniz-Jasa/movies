@@ -153,7 +153,7 @@ const ShowModal = () => {
       onOpenChange={handleCloseModal}
       aria-label="Modal containing show's details"
     >
-      <DialogContent className="w-full sm:w-[40%] overflow-hidden rounded-md bg-zinc-900 p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl xl:h-[70vh] h-auto sm:h-[80vh] flex flex-col">
+      <DialogContent className="w-[85%] sm:w-[40%] overflow-hidden rounded-md bg-zinc-900 p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl xl:h-[70vh] h-auto sm:h-[80vh] flex flex-col">
         <div className="video-wrapper relative aspect-video flex-grow">
           <Image
             fill
