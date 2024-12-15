@@ -151,9 +151,10 @@ const ShowModal = () => {
     <Dialog
       open={modalStore.open}
       onOpenChange={handleCloseModal}
-      aria-label="Modal containing show's details">
-      <DialogContent className="w-full overflow-hidden rounded-md bg-zinc-900 p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl">
-        <div className="video-wrapper relative aspect-video">
+      aria-label="Modal containing show's details"
+    >
+      <DialogContent className="w-full overflow-hidden rounded-md bg-zinc-900 p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl xl:h-[70vh] h-auto sm:h-[80vh] flex flex-col">
+        <div className="video-wrapper relative aspect-video flex-grow">
           <Image
             fill
             priority
@@ -171,27 +172,24 @@ const ShowModal = () => {
               onReady={onReady}
               videoId={trailer}
               id="video-trailer"
-              title={
-                modalStore.show?.title ??
-                modalStore.show?.name ??
-                'video-trailer'
-              }
+              title={modalStore.show?.title ?? modalStore.show?.name ?? 'video-trailer'}
               className="relative aspect-video w-full"
               style={{ width: '100%', height: '100%' }}
-              iframeClassName={`relative pointer-events-none w-[100%] h-[100%] z-[-10] opacity-0`}
+              iframeClassName="relative pointer-events-none w-[100%] h-[100%] z-[-10] opacity-0"
             />
           )}
           <div className="absolute bottom-6 z-20 flex w-full items-center justify-between gap-2 px-10">
             <div className="flex items-center gap-2.5">
               <Link
-                href={`/watch/${
-                  modalStore.show?.media_type === MediaType.MOVIE
+                href={`/watch/${modalStore.show?.media_type === MediaType.MOVIE
                     ? 'movie'
                     : 'tv'
-                }/${modalStore.show?.id}`}>
+                  }/${modalStore.show?.id}`}
+              >
                 <Button
                   aria-label={`${isPlaying ? 'Pause' : 'Play'} show`}
-                  className="group h-auto rounded py-1.5">
+                  className="group h-auto rounded py-1.5"
+                >
                   <>
                     <Icons.play
                       className="mr-1.5 h-6 w-6 fill-current"
@@ -206,7 +204,8 @@ const ShowModal = () => {
               aria-label={`${isMuted ? 'Unmute' : 'Mute'} video`}
               variant="ghost"
               className="h-auto rounded-full bg-neutral-800 p-1.5 opacity-50 ring-1 ring-slate-400 hover:bg-neutral-800 hover:opacity-100 hover:ring-white focus:ring-offset-0 dark:bg-neutral-800 dark:hover:bg-neutral-800"
-              onClick={handleChangeMute}>
+              onClick={handleChangeMute}
+            >
               {isMuted ? (
                 <Icons.volumeMute className="h-6 w-6" aria-hidden="true" />
               ) : (
@@ -215,14 +214,14 @@ const ShowModal = () => {
             </Button>
           </div>
         </div>
-        <div className="grid gap-2.5 px-10 pb-10">
+
+        <div className="grid gap-2.5 px-10 pb-10 flex-grow">
           <DialogTitle className="text-lg font-medium leading-6 text-slate-50 sm:text-xl">
             {modalStore.show?.title ?? modalStore.show?.name}
           </DialogTitle>
           <div className="flex items-center space-x-2 text-sm sm:text-base">
             <p className="font-semibold text-green-400">
-              {Math.round((Number(modalStore.show?.vote_average) / 10) * 100) ??
-                '-'}
+              {Math.round((Number(modalStore.show?.vote_average) / 10) * 100) ?? '-'}
               % Match
             </p>
             {modalStore.show?.release_date ? (
@@ -246,6 +245,7 @@ const ShowModal = () => {
         </div>
       </DialogContent>
     </Dialog>
+
   );
 };
 
