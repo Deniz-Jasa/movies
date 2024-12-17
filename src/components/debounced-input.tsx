@@ -75,9 +75,9 @@ export function DebouncedInput({
         type="text"
         placeholder="Search..."
         className={cn(
-          'h-auto rounded-none py-1.5 pl-8 text-sm transition-all duration-300',
+          'h-auto py-2 pl-10 pr-4 text-sm transition-all duration-300 ease-in-out', // Added more padding to left (pl-10) and right (pr-4)
           open
-            ? 'w-28 border md:w-40  lg:w-60'
+            ? 'w-50 border md:w-52 lg:w-80' // Increased width for larger screens
             : 'w-0 border-none bg-transparent',
           className,
         )}
@@ -86,29 +86,60 @@ export function DebouncedInput({
         onChange={handleChange}
         {...props}
       />
-      <Button
-        id="search-btn"
-        aria-label="Search"
-        variant="ghost"
-        className={cn(
-          'absolute top-1/2 h-auto -translate-y-1/2 rounded-full p-1 hover:bg-transparent',
-          open ? 'left-1' : 'left-[9px]',
-        )}
-        onClick={() => {
-          if (!inputRef.current) {
-            return;
-          }
-          inputRef.current.focus();
-          onChangeStatusOpen(!open);
-        }}>
-        <Icons.search
+      {/* Button when input is not open */}
+      {!open && (
+        <Button
+          id="search-btn"
+          aria-label="Search"
+          variant="outline" // Regular outline when input is closed
           className={cn(
-            'transition-opacity hover:opacity-75 active:scale-95',
-            open ? 'h-4 w-4' : 'h-5 w-5',
+            'absolute top-1/2 -translate-y-1/2 p-2 pl-2.5 pr-2.5',
+            open ? 'left-2 bg-transparent' : 'left-[13px]',
           )}
-          aria-hidden="true"
-        />
-      </Button>
+          onClick={() => {
+            if (!inputRef.current) {
+              return;
+            }
+            inputRef.current.focus();
+            onChangeStatusOpen(!open);
+          }}
+        >
+          <Icons.search
+            className={cn(
+              'transition-opacity hover:opacity-75 active:scale-95',
+              open ? 'h-4 w-4' : 'h-5 w-5',
+            )}
+            aria-hidden="true"
+          />
+        </Button>
+      )}
+
+      {/* Button when input is open (ghost variant) */}
+      {open && (
+        <Button
+          id="search-btn-ghost"
+          aria-label="Search"
+          variant="ghost" // Ghost variant when input is open
+          className={cn(
+            'absolute top-1/2 -translate-y-1/2 p-2 left-1', // Adjust left to position the icon correctly
+          )}
+          onClick={() => {
+            if (!inputRef.current) {
+              return;
+            }
+            inputRef.current.focus();
+            onChangeStatusOpen(!open);
+          }}
+        >
+          <Icons.search
+            className={cn(
+              'transition-opacity hover:opacity-75 active:scale-95',
+              open ? 'h-4 w-4' : 'h-5 w-5',
+            )}
+            aria-hidden="true"
+          />
+        </Button>
+      )}
     </div>
   );
 }

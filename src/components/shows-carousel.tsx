@@ -133,7 +133,7 @@ export const ShowCard = ({
             : '/images/grey-thumbnail.jpg'
         }
         alt={show.title ?? show.name ?? 'poster'}
-        className="h-full w-full cursor-pointer rounded-lg px-1 transition-all md:hover:scale-110"
+        className="h-[95%] w-[95%] cursor-pointer rounded-lg px-1 transition-all transform hover:scale-110 hover:shadow-lg"
         style={{
           objectFit: 'cover',
         }}

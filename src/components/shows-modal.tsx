@@ -147,13 +147,22 @@ const ShowModal = () => {
     }
   };
 
+  const tagColors = [
+    '#892323', // Red
+    '#3D7633', // Green
+    '#334176', // Blue
+    '#633851', // Pink
+    '#686E25', // Yellow
+    '#3E6967'  // Teal
+  ];
+
   return (
     <Dialog
       open={modalStore.open}
       onOpenChange={handleCloseModal}
       aria-label="Modal containing show's details"
     >
-      <DialogContent className="w-[85%] sm:w-[40%] overflow-hidden rounded-md bg-zinc-900 p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl xl:h-[70vh] h-auto sm:h-[80vh] flex flex-col">
+      <DialogContent className="w-[85%] sm:w-[40%] overflow-hidden rounded-md bg-white p-0 text-left align-middle shadow-xl dark:bg-zinc-900 sm:max-w-3xl lg:max-w-4xl xl:h-[70vh] h-auto sm:h-[80vh] flex flex-col">
         <div className="video-wrapper relative aspect-video flex-grow">
           <Image
             fill
@@ -182,8 +191,8 @@ const ShowModal = () => {
             <div className="flex items-center gap-2.5">
               <Link
                 href={`/watch/${modalStore.show?.media_type === MediaType.MOVIE
-                    ? 'movie'
-                    : 'tv'
+                  ? 'movie'
+                  : 'tv'
                   }/${modalStore.show?.id}`}
               >
                 <Button
@@ -203,7 +212,7 @@ const ShowModal = () => {
             <Button
               aria-label={`${isMuted ? 'Unmute' : 'Mute'} video`}
               variant="ghost"
-              className="h-auto rounded-full bg-neutral-800 p-1.5 opacity-50 ring-1 ring-slate-400 hover:bg-neutral-800 hover:opacity-100 hover:ring-white focus:ring-offset-0 dark:bg-neutral-800 dark:hover:bg-neutral-800"
+              className="h-auto rounded-full bg-white dark:bg-neutral-800 p-1.5 opacity-50 ring-1 ring-slate-400 hover:bg-neutral-800 hover:opacity-100 hover:ring-white focus:ring-offset-0 dark:bg-neutral-800 dark:hover:bg-neutral-800"
               onClick={handleChangeMute}
             >
               {isMuted ? (
@@ -216,7 +225,7 @@ const ShowModal = () => {
         </div>
 
         <div className="grid gap-2.5 px-10 pb-10 flex-grow">
-          <DialogTitle className="text-lg font-medium leading-6 text-slate-50 sm:text-xl">
+          <DialogTitle className="text-lg font-medium leading-6 text-black dark:text-slate-50 sm:text-xl">
             {modalStore.show?.title ?? modalStore.show?.name}
           </DialogTitle>
           <div className="flex items-center space-x-2 text-sm sm:text-base">
@@ -225,7 +234,7 @@ const ShowModal = () => {
               % Match
             </p>
             {modalStore.show?.release_date ? (
-              <p>{getYear(modalStore.show?.release_date)}</p>
+              <p className="text-black dark:text-slate-50">{getYear(modalStore.show?.release_date)}</p>
             ) : modalStore.show?.first_air_date ? (
               <p>{getYear(modalStore.show?.first_air_date)}</p>
             ) : null}
@@ -235,13 +244,24 @@ const ShowModal = () => {
               </span>
             )}
           </div>
-          <DialogDescription className="line-clamp-3 text-xs text-slate-50 dark:text-slate-50 sm:text-sm">
+          <DialogDescription className="line-clamp-3 text-xs text-black dark:text-slate-50 sm:text-sm">
             {modalStore.show?.overview ?? '-'}
           </DialogDescription>
-          <div className="flex items-center gap-2 text-xs sm:text-sm">
-            <span className="text-slate-400">Genres:</span>
-            {genres.map((genre) => genre.name).join(', ')}
+
+          <div className="flex items-center gap-2 text-xs sm:text-sm mt-2">
+            <span className="text-grey">Genres:</span>
+            {genres.map((genre, index) => (
+              <span
+                key={genre.name}
+                className="px-[6px] py-[2px] bg-blue-500 text-white rounded-sm text-xs"
+                style={{ backgroundColor: tagColors[index % tagColors.length] }}
+              >
+                {genre.name}
+              </span>
+            ))}
           </div>
+
+
         </div>
       </DialogContent>
     </Dialog>

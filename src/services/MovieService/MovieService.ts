@@ -35,7 +35,6 @@ const FAVOURITES: FavoriteItem[] = [
   { id: 76331, mediaType: 'tv' },      // Succession
   { id: 652, mediaType: 'movie' },     // Troy
   { id: 238, mediaType: 'movie' },    // The Godfather
-  { id: 278, mediaType: 'movie' },    // Shawshank Redemption
   { id: 550, mediaType: 'movie' },    // Fight Club
   { id: 680, mediaType: 'movie' },    // Pulp Fiction
   { id: 155, mediaType: 'movie' },    // The Dark Knight

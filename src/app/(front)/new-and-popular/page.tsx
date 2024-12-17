@@ -45,6 +45,8 @@ export default async function NewAndPopularPage() {
       <h1 className="hidden">{h1}</h1>
       <Hero shows={allShows[0].shows} />
       <ShowsContainer shows={allShows} />
+      <br></br>
+      <br></br>
     </>
   );
 }

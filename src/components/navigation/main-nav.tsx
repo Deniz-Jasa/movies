@@ -145,27 +145,29 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <nav
       className={cn(
-        'relative flex h-16 w-full items-center justify-between bg-gradient-to-b from-secondary/70 from-10% px-4 sm:px-6 md:px-[4vw] transition-colors duration-300 md:sticky',
-        isScrolled ? 'bg-black/70 shadow-md backdrop-blur-xl backdrop-saturate-300' : 'bg-transparent',
-      )}>
-      <div className="flex items-center gap-6 md:gap-10">
+        'fixed left-1/2 top-3 z-10 flex h-[70px] md:h-[80px] w-[90%] -translate-x-1/2 items-center justify-between bg-transparent from-secondary/70 from-10% px-4 py-4 sm:px-6 transition-colors duration-300 rounded-xl mb-30', // Use `left-1/2` with `-translate-x-1/2` to center it horizontally
+        isScrolled ? 'bg-secondary/70 shadow-xl backdrop-blur-xl backdrop-saturate-300 shadow-lg' : 'bg-transparent', // Adjusted shadow on scroll
+      )}
+
+    >
+      <div className="flex items-center gap-6 md:gap-6">
         <Link
           href="/home"
           className="hidden md:block"
-          onClick={() => handleChangeStatusOpen(false)}>
-          <div className="flex items-center gap-4">
+          onClick={() => handleChangeStatusOpen(false)}
+        >
+          <div className="flex items-center gap-0">
             <Image
               src={LogoIcon}
               alt="Logo"
               className="w-9"
             />
-            <Image
+            {/* <Image
               src={Logo}
               alt="Logo"
               className="w-20"
-            />
+            /> */}
           </div>
-
         </Link>
         {items?.length ? (
           <nav className="hidden gap-6 md:flex">
@@ -180,7 +182,8 @@ export function MainNav({ items }: MainNavProps) {
                       path === item.href && 'font-bold text-foreground',
                       item.disabled && 'cursor-not-allowed opacity-80',
                     )}
-                    onClick={() => handleChangeStatusOpen(false)}>
+                    onClick={() => handleChangeStatusOpen(false)}
+                  >
                     {item.title}
                   </Link>
                 ),
@@ -188,11 +191,9 @@ export function MainNav({ items }: MainNavProps) {
           </nav>
         ) : null}
         <div className="block md:hidden">
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <div className="flex items-center justify-between w-full">
-                {/* Logo on the left */}
                 <Link href="/home">
                   <Image
                     src={LogoIcon}
@@ -200,13 +201,13 @@ export function MainNav({ items }: MainNavProps) {
                     className="w-8 mr-3"
                   />
                 </Link>
-
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="start"
               sideOffset={20}
-              className="w-full p-8 overflow-y-auto overflow-x-hidden rounded-sm">
+              className="w-full p-8 overflow-y-auto overflow-x-hidden rounded-sm"
+            >
               {items?.map((item, index) => (
                 <DropdownMenuItem key={index} asChild className="items-center justify-center">
                   {item.href && (
@@ -215,7 +216,8 @@ export function MainNav({ items }: MainNavProps) {
                         className={cn(
                           'line-clamp-1 text-foreground/60 hover:text-foreground/80 mb-5',
                           path === item.href && 'font-bold text-foreground',
-                        )}>
+                        )}
+                      >
                         {item.title}
                       </span>
                     </Link>
@@ -229,10 +231,8 @@ export function MainNav({ items }: MainNavProps) {
                   Logout
                 </Button>
               </div>
-
             </DropdownMenuContent>
           </DropdownMenu>
-
         </div>
       </div>
       <div className="flex items-center justify-between gap-4">
@@ -245,14 +245,6 @@ export function MainNav({ items }: MainNavProps) {
           containerClassName={cn(path === '/' ? 'hidden' : 'flex')}
         />
 
-        <Link
-          rel="noreferrer"
-          target="_blank"
-          href={siteConfig.links.github}
-          className={cn(path === '/' ? 'flex' : 'hidden')}>
-          <Icons.gitHub className="h-5 w-5 hover:bg-transparent" />
-        </Link>
-
         <div className="hidden md:flex gap-4">
           <ThemeToggle />
           <Button variant="outline" onClick={handleLogout}>
@@ -260,7 +252,6 @@ export function MainNav({ items }: MainNavProps) {
           </Button>
         </div>
       </div>
-
     </nav>
   );
 }

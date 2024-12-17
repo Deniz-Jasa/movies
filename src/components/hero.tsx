@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import MovieService from '@/services/MovieService';
 import { MediaType, type Show } from '@/types';
 import { useSearchStore } from '@/stores/search';
 import { Button } from '@/components/ui/button';
@@ -9,7 +10,6 @@ import Image from 'next/image';
 import { useModalStore } from '@/stores/modal';
 import Link from 'next/link';
 import { getIdFromSlug } from '@/lib/utils';
-import MovieService from '@/services/MovieService';
 import { type AxiosResponse } from 'axios';
 
 interface HeroProps {
@@ -64,7 +64,7 @@ const Hero = ({ shows }: HeroProps) => {
   }
 
   return (
-    <section aria-label="Hero" className="w-full">
+    <section aria-label="Hero" className="w-full mb-20">
       {randomShow && (
         <>
           <div className="absolute inset-0 z-0 h-[100vw] w-full sm:h-[56.25vw]">
@@ -77,12 +77,12 @@ const Hero = ({ shows }: HeroProps) => {
               priority
             />
             <div className="absolute bottom-0 left-0 right-0 top-0">
-              <div className="absolute bottom-[35%] left-[4%] top-0 z-10 flex w-[36%] flex-col justify-end space-y-2">
+              <div className="absolute bottom-[35%] left-[5%] top-0 z-10 flex w-[36%] flex-col justify-end space-y-2">
                 <h1 className="text-[6vw] sm:text-[4vw] md:text-[3vw] lg:text-[3vw] font-bold">
                   {randomShow?.title ?? randomShow?.name}
                 </h1>
 
-                <div className="flex space-x-2 text-[2.5vw] font-semibold md:text-[1.2vw]">
+                <div className="flex space-x-2 text-[2.8vw] font-semibold md:text-[1.3vw] lg:text-[1.3vw] xl:text-[0.9vw]">
                   <p className="text-green-600">
                     {Math.round(randomShow?.vote_average * 10) ?? '-'}% Match
                   </p>
@@ -90,7 +90,7 @@ const Hero = ({ shows }: HeroProps) => {
                   <p>{randomShow?.release_date ?? '-'}</p>
                 </div>
                 {/* <p className="line-clamp-4 text-sm text-gray-300 md:text-base"> */}
-                <p className="hidden text-[1.7vw] sm:line-clamp-3">
+                <p className="hidden text-[1.7vw] sm:line-clamp-3 lg:text-[1.3vw] xl:text-[0.9vw]">
                   {randomShow?.overview ?? '-'}
                 </p>
                 <div className="mt-[1.5vw] flex items-center space-x-2">

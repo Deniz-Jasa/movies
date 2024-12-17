@@ -88,10 +88,12 @@ export default async function Home() {
     <>
       <SiteHeader />
       <h1 className="hidden">{h1}</h1>
-      <Hero shows={allShows[0].shows} />
-      <ShowsContainer shows={allShows} />
-      <br></br>
-      <br></br>
+      <div className="ml-[1%]">
+        <Hero shows={allShows[0].shows} />
+        <ShowsContainer shows={allShows} />
+        <br></br>
+        <br></br>
+      </div>
     </>
   );
 }
