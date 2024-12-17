@@ -1,8 +1,15 @@
+<img src="https://github.com/user-attachments/assets/f4791f7d-6411-4bec-9e78-e80ae1e38d76" alt="logo-icon" width="150" />
+
 # Fakeflix
 
-A movie and series streaming website.
 
-![Fakeflix __](https://github.com/user-attachments/assets/acb5d31c-3370-4a2b-85e4-127f1de97930)
+A movie and TV series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. 
+
+Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
+
+
+![Fakeflix __ · 1 39pm · 12-15](https://github.com/user-attachments/assets/2601792d-624e-460a-a1bf-2c4e7345bc14)
+
 
 ## Features
 
