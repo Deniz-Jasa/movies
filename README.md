@@ -8,7 +8,7 @@ A movie and TV series streaming website clone. This was built for educational an
 Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
 
 
-![Fakeflix __ · 1 39pm · 12-15](https://github.com/user-attachments/assets/2601792d-624e-460a-a1bf-2c4e7345bc14)
+![Fakeflix __ · 9 39pm · 12-16](https://github.com/user-attachments/assets/95b96545-d760-4daf-aa03-d792a33276dc)
 
 
 ## Features
