@@ -65,6 +65,7 @@ export type KeyWordResponse = {
 };
 
 export type Genre = {
+  color: string;
   id: number;
   name: string | null;
 };

@@ -160,7 +160,7 @@ export function MainNav({ items }: MainNavProps) {
             <Image
               src={LogoIcon}
               alt="Logo"
-              className="w-9"
+              className="w-10"
             />
             {/* <Image
               src={Logo}
@@ -198,7 +198,7 @@ export function MainNav({ items }: MainNavProps) {
                   <Image
                     src={LogoIcon}
                     alt="Logo"
-                    className="w-8 mr-3"
+                    className="w-10 mr-3"
                   />
                 </Link>
               </div>
