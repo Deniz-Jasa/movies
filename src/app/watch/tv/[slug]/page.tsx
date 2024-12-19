@@ -14,6 +14,6 @@ export default function Page({ params }: { params: { slug: string } }) {
       ✕
     </Link>
 
-    <EmbedPlayer url={`https://vidsrc.xyz/embed/tv/${id}`} />
+    <EmbedPlayer url={`https://vidsrc.cc/v2/embed/tv/${id}`} />
   </>;
 }
