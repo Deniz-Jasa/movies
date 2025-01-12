@@ -2,11 +2,11 @@
 
 # Fakeflix
 
+A movie and TV series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. You can use login: test, password: test123 to get a preview!
 
-A movie and TV series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. 
+My changes include: mobile friendly, updated UI (navbar, content tiles, preview page, login page, more usable player component)
 
 Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
-
 
 ![Fakeflix __ · 9 39pm · 12-16](https://github.com/user-attachments/assets/95b96545-d760-4daf-aa03-d792a33276dc)
 
