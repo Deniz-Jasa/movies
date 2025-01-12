@@ -4,7 +4,7 @@
 
 A movie and TV series streaming website clone. This was built for educational and learning purposes. It is locked behind authentication to prevent unauthorized usage. You can use login: test, password: test123 to get a preview!
 
-My changes include: mobile friendly, updated UI (navbar, content tiles, preview page, login page, more usable player component)
+My changes include: mobile friendly, updated UI (branding, color theme, navbar, movie/tv tiles, preview page, category tagging, login page, player component)
 
 Live @ <a href="https://fakeflix-two.vercel.app" target="_blank">https://fakeflix-two.vercel.app</a>
 
