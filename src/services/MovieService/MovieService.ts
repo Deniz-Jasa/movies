@@ -33,6 +33,7 @@ type FavoriteItem = {
 
 const FAVOURITES: FavoriteItem[] = [
   { id: 76331, mediaType: 'tv' },      // Succession
+  { id: 241609, mediaType: 'tv' },      // Succession
   { id: 652, mediaType: 'movie' },     // Troy
   { id: 238, mediaType: 'movie' },    // The Godfather
   { id: 550, mediaType: 'movie' },    // Fight Club
