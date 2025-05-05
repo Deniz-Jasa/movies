@@ -1,9 +1,11 @@
+'use client';
+
 import * as React from 'react';
 import { cn, debounce } from '@/lib/utils';
-import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input, type InputProps } from '@/components/ui/input';
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
+import { Search as LucideSearch } from 'lucide-react';
 
 interface DebouncedInputProps extends Omit<InputProps, 'onChange'> {
   containerClassName?: string;
@@ -29,42 +31,36 @@ export function DebouncedInput({
 }: DebouncedInputProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  // close search input on clicking outside,
+  // Close on outside click
   useOnClickOutside(inputRef, () => {
     if (!value) onChangeStatusOpen(false);
   });
 
-  // configure keyboard shortcuts
+  // Escape clears, Ctrl/Cmd+K opens
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // close search input on pressing escape
-      if (e.key === 'Escape') {
-        void onChange('');
-      }
-      // open search input on pressing ctrl + k or cmd + k
+      if (e.key === 'Escape') void onChange('');
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        if (!inputRef.current) return;
         e.preventDefault();
         onChangeStatusOpen(true);
-        inputRef.current.focus();
+        inputRef.current?.focus();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onChange, onChangeStatusOpen]);
 
+  // Debounced onChange wrapper — accepts any args, pulls out first as string
   const debounceInput = React.useCallback(
-    debounce((value) => {
-      const strValue = value as string;
-      void onChange(strValue);
+    debounce((...args: any[]) => {
+      const v = args[0] as string;
+      void onChange(v);
     }, debounceTimeout),
-    [],
+    [onChange, debounceTimeout]
   );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    debounceInput(event.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debounceInput(e.target.value);
   };
 
   return (
@@ -74,67 +70,49 @@ export function DebouncedInput({
         id={id}
         type="text"
         className={cn(
-          'h-auto py-[8.5px] pl-10 pr-4 text-[10pt] transition-all duration-300 ease-in-out', // Added more padding to left (pl-10) and right (pr-4)
-          open
-            ? 'w-50 border md:w-52 lg:w-80' // Increased width for larger screens
-            : 'w-0 border-none bg-transparent',
-          className,
+          'h-auto py-[8.5px] pl-10 pr-4 text-[10pt] transition-all duration-300 ease-in-out',
+          open ? 'w-50 border md:w-52 lg:w-80' : 'w-0 border-none bg-transparent',
+          className
         )}
         defaultValue={value}
         maxLength={maxLength}
         onChange={handleChange}
         {...props}
       />
-      {/* Button when input is not open */}
-      {!open && (
+
+      {/* CLOSED state */}
+      {!open ? (
         <Button
           id="search-btn"
           aria-label="Search"
           variant="outline"
+          size="icon"
           className={cn(
-            'absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center',
+            'absolute top-1/2 -translate-y-1/2',
             open ? 'left-2' : 'left-[13px]',
+            'rounded-full'
           )}
           onClick={() => {
-            if (!inputRef.current) {
-              return;
-            }
-            inputRef.current.focus();
+            inputRef.current?.focus();
             onChangeStatusOpen(!open);
           }}
         >
-          <Icons.search
-            className={cn(
-              'transition-opacity hover:opacity-75 active:scale-95 h-40 w-40',
-            )}
-            aria-hidden="true"
-          />
+          <LucideSearch size={14} aria-hidden />
         </Button>
-      )}
-
-      {/* Button when input is open (ghost variant) */}
-      {open && (
+      ) : (
+        /* OPEN state */
         <Button
-          id="search-btn"
-          aria-label="Search"
+          id="close-search-btn"
+          aria-label="Close search"
           variant="ghost"
-          className={cn(
-            'absolute top-1/2 -translate-y-1/2 w-10 h-10 left-1 rounded-full flex items-center justify-center',
-          )}
+          size="icon"
+          className="absolute top-1/2 left-1 -translate-y-1/2 rounded-full"
           onClick={() => {
-            if (!inputRef.current) {
-              return;
-            }
-            inputRef.current.focus();
+            inputRef.current?.focus();
             onChangeStatusOpen(!open);
           }}
         >
-          <Icons.search
-            className={cn(
-              'transition-opacity hover:opacity-75 active:scale-95 h-5 w-5',
-            )}
-            aria-hidden="true"
-          />
+          <LucideSearch size={14} aria-hidden />
         </Button>
       )}
     </div>

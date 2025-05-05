@@ -232,7 +232,7 @@ export function MainNav({ items }: MainNavProps) {
                 <Button 
                   variant="outline" 
                   onClick={handleLogout}
-                  className="rounded-full bg-[#111111] text-white font-[9pt] border-none hover:bg-[#222222]"
+                  className="rounded-full bg-[#111111] text-white font-[9pt] hover:bg-[#222222] border border-input"
                 >
                   Logout
                 </Button>
@@ -256,7 +256,7 @@ export function MainNav({ items }: MainNavProps) {
           <Button 
             variant="outline" 
             onClick={handleLogout} 
-            className="rounded-full bg-[#111111] text-white border-none"
+            className="rounded-full bg-[#111111] text-white border border-input"
           >
             Logout
           </Button>
