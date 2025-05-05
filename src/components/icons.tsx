@@ -13,6 +13,7 @@ import {
   Pause,
   VolumeX,
   Volume2,
+  LogOut,
 } from "lucide-react";
 
 type IconProps = LucideProps;
@@ -247,4 +248,5 @@ export const Icons = {
   close: X,
   instagram: Instagram,
   youtube: Youtube,
+  logout: LogOut,
 };

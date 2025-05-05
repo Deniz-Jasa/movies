@@ -145,8 +145,8 @@ export function MainNav({ items }: MainNavProps) {
   return (
     <nav
       className={cn(
-        'fixed left-1/2 top-3 z-10 flex h-[70px] md:h-[80px] w-[90%] -translate-x-1/2 items-center justify-between bg-transparent from-secondary/70 from-10% px-4 py-4 sm:px-6 transition-colors duration-300 rounded-xl mb-30', // Use `left-1/2` with `-translate-x-1/2` to center it horizontally
-        isScrolled ? 'bg-secondary/70 shadow-xl backdrop-blur-xl backdrop-saturate-300 shadow-lg' : 'bg-transparent', // Adjusted shadow on scroll
+        'fixed left-1/2 top-3 z-10 flex h-[70px] md:h-[80px] w-[90%] -translate-x-1/2 items-center justify-between bg-transparent from-secondary/70 from-10% px-4 py-4 sm:px-6 transition-colors duration-300 rounded-full mb-30', // Use `left-1/2` with `-translate-x-1/2` to center it horizontally
+        isScrolled ? 'bg-secondary/80 shadow-xl backdrop-blur-2xl backdrop-saturate-300 shadow-lg' : 'bg-transparent', // Adjusted shadow on scroll
       )}
 
     >
@@ -226,8 +226,14 @@ export function MainNav({ items }: MainNavProps) {
               ))}
 
               <div className="flex items-center gap-4">
-                <ThemeToggle />
-                <Button variant="outline" onClick={handleLogout}>
+                <div className="bg-[#111111] rounded-full p-2">
+                  <ThemeToggle />
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={handleLogout}
+                  className="rounded-full bg-[#111111] text-white font-[9pt] border-none hover:bg-[#222222]"
+                >
                   Logout
                 </Button>
               </div>
@@ -247,7 +253,11 @@ export function MainNav({ items }: MainNavProps) {
 
         <div className="hidden md:flex gap-4">
           <ThemeToggle />
-          <Button variant="outline" onClick={handleLogout}>
+          <Button 
+            variant="outline" 
+            onClick={handleLogout} 
+            className="rounded-full bg-[#111111] text-white border-none"
+          >
             Logout
           </Button>
         </div>

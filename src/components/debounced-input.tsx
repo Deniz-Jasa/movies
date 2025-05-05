@@ -73,9 +73,8 @@ export function DebouncedInput({
         ref={inputRef}
         id={id}
         type="text"
-        placeholder="Search..."
         className={cn(
-          'h-auto py-2 pl-10 pr-4 text-sm transition-all duration-300 ease-in-out', // Added more padding to left (pl-10) and right (pr-4)
+          'h-auto py-[8.5px] pl-10 pr-4 text-[10pt] transition-all duration-300 ease-in-out', // Added more padding to left (pl-10) and right (pr-4)
           open
             ? 'w-50 border md:w-52 lg:w-80' // Increased width for larger screens
             : 'w-0 border-none bg-transparent',
@@ -91,10 +90,10 @@ export function DebouncedInput({
         <Button
           id="search-btn"
           aria-label="Search"
-          variant="outline" // Regular outline when input is closed
+          variant="outline"
           className={cn(
-            'absolute top-1/2 -translate-y-1/2 p-2 pl-2.5 pr-2.5',
-            open ? 'left-2 bg-transparent' : 'left-[13px]',
+            'absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full flex items-center justify-center',
+            open ? 'left-2' : 'left-[13px]',
           )}
           onClick={() => {
             if (!inputRef.current) {
@@ -106,8 +105,7 @@ export function DebouncedInput({
         >
           <Icons.search
             className={cn(
-              'transition-opacity hover:opacity-75 active:scale-95',
-              open ? 'h-4 w-4' : 'h-5 w-5',
+              'transition-opacity hover:opacity-75 active:scale-95 h-40 w-40',
             )}
             aria-hidden="true"
           />
@@ -117,11 +115,11 @@ export function DebouncedInput({
       {/* Button when input is open (ghost variant) */}
       {open && (
         <Button
-          id="search-btn-ghost"
+          id="search-btn"
           aria-label="Search"
-          variant="ghost" // Ghost variant when input is open
+          variant="ghost"
           className={cn(
-            'absolute top-1/2 -translate-y-1/2 p-2 left-1', // Adjust left to position the icon correctly
+            'absolute top-1/2 -translate-y-1/2 w-10 h-10 left-1 rounded-full flex items-center justify-center',
           )}
           onClick={() => {
             if (!inputRef.current) {
@@ -133,8 +131,7 @@ export function DebouncedInput({
         >
           <Icons.search
             className={cn(
-              'transition-opacity hover:opacity-75 active:scale-95',
-              open ? 'h-4 w-4' : 'h-5 w-5',
+              'transition-opacity hover:opacity-75 active:scale-95 h-5 w-5',
             )}
             aria-hidden="true"
           />

@@ -34,11 +34,12 @@ export function ModeToggle() {
       variant="outline"
       size="icon"
       onClick={toggleTheme}
+      className="w-10 h-10 rounded-full flex items-center justify-center"
     >
       {isDark ? (
-        <Moon className="h-[1.2rem] w-[1.2rem]" />
+        <Moon className="h-[14px] w-[14px]" />
       ) : (
-        <Sun className="h-[1.2rem] w-[1.2rem]" />
+        <Sun className="h-[14px] w-[14px]" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

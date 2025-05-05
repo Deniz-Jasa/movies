@@ -30,8 +30,7 @@ Thumbs.db
 # Local configuration files
 *.local
 
-# Next.js public directory (if you don't want to include it in Git)
-public/
-
 # Static files (such as images, etc.)
 static/
+.vercel
+.env*.local

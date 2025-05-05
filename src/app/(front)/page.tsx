@@ -1,7 +1,9 @@
+// app/signin/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import MoviePostersGrid from "@/components/movie-posters-grid";
 
 export default function SignInPage() {
   const [username, setUsername] = useState("");
@@ -13,29 +15,25 @@ export default function SignInPage() {
   const hardcodedUsername = process.env.NEXT_PUBLIC_USERNAME;
   const hardcodedPassword = process.env.NEXT_PUBLIC_PASSWORD;
 
-  // Load saved credentials on component mount
   useEffect(() => {
-    const savedUsername = localStorage.getItem('rememberedUsername');
-    const savedPassword = localStorage.getItem('rememberedPassword');
-    if (savedUsername && savedPassword) {
-      setUsername(savedUsername);
-      setPassword(savedPassword);
+    const u = localStorage.getItem("rememberedUsername");
+    const p = localStorage.getItem("rememberedPassword");
+    if (u && p) {
+      setUsername(u);
+      setPassword(p);
       setRememberMe(true);
     }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (username === hardcodedUsername && password === hardcodedPassword) {
-      // Save credentials if "Remember Me" is checked
       if (rememberMe) {
-        localStorage.setItem('rememberedUsername', username);
-        localStorage.setItem('rememberedPassword', password);
+        localStorage.setItem("rememberedUsername", username);
+        localStorage.setItem("rememberedPassword", password);
       } else {
-        // Clear saved credentials if "Remember Me" is unchecked
-        localStorage.removeItem('rememberedUsername');
-        localStorage.removeItem('rememberedPassword');
+        localStorage.removeItem("rememberedUsername");
+        localStorage.removeItem("rememberedPassword");
       }
       router.push("/home");
     } else {
@@ -44,55 +42,65 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="container mx-auto flex justify-center items-center min-h-screen">
-      <form onSubmit={handleSubmit} className="space-y-4 w-96 p-8 border rounded-md">
+    <div className="min-h-screen w-full grid grid-cols-1 lg:grid-cols-2 bg-[#101010]">
+      {/* left: login form */}
+      <div className="flex items-center justify-center px-8">
+        <form
+          onSubmit={handleSubmit}
+          className="w-[350px] p-4 bg-[#101010] backdrop-blur-sm"
+        >
+          <h2 className="text-[14pt] text-center font-bold mb-1 text-white">
+            Sign In
+          </h2>
+          <p className="text-[10pt] text-center mb-10 text-[#9C9C9C]">
+            Use your username and password to sign in
+          </p>
 
-        <h2 className="text-2xl font-bold text-center mb-4">Sign In</h2>
+          {error && <p className="text-red-500 text-center">{error}</p>}
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
-
-        <div>
-          <label htmlFor="username" className="block text-sm font-medium">Username</label>
+          <label
+            htmlFor="username"
+            className="block text-[10pt] font-medium text-[#9C9C9C]"
+          >
+            Username
+          </label>
           <input
             id="username"
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full mb-4 p-2 mt-1 bg-transparent border border-[#222] rounded text-sm text-white focus:outline-none"
           />
-        </div>
 
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium">Password</label>
+          <label
+            htmlFor="password"
+            className="block text-[10pt] font-medium text-[#9C9C9C]"
+          >
+            Password
+          </label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 mt-1 border rounded-md"
+            className="w-full p-2 mb-4 mt-1 bg-transparent border border-[#222] rounded text-sm text-white focus:outline-none"
           />
-        </div>
 
-        <div className="flex items-center">
-          <input
-            id="rememberMe"
-            type="checkbox"
-            checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
-            className="h-4 w-4 text-white"
-          />
-          <label htmlFor="rememberMe" className="ml-2 block text-sm text-white">
-            Remember me
-          </label>
-        </div>
-        <br></br>
+          <button
+            type="submit"
+            className="w-full p-2 bg-[#1C1C1C] border border-[#222] text-[10pt] text-white rounded hover:bg-[#222] transition-colors duration-200"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
 
-        <button type="submit" className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-          Sign In
-        </button>
-      </form>
+      {/* right: posters panel – hidden on mobile */}
+      <div className="hidden lg:block relative w-full h-screen overflow-hidden">
+        <MoviePostersGrid />
+      </div>
     </div>
   );
 }

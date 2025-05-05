@@ -9,6 +9,9 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      sans: ["Inter", ...fontFamily.sans],
+    },
     screens: {
       xs: "500px",
       // => @media (min-width: 500px) { ... }
@@ -89,10 +92,6 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-      },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        heading: ["var(--font-heading)", ...fontFamily.sans],
       },
     },
   },
