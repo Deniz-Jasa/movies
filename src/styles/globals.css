@@ -163,3 +163,16 @@ body,
   background-color: rgba(17, 17, 17, 0);
   background-image: -webkit-linear-gradient(top, rgba(17, 17, 17, 0), #111);
 }
+
+/* Normalize autofill styling on dark inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #101010 inset;
+  box-shadow: 0 0 0px 1000px #101010 inset;
+  transition: background-color 9999s ease-out 0s;
+}

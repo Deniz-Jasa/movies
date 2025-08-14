@@ -8,6 +8,7 @@ import { Inter as FontSans } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@/components/analytics';
 import { siteConfig } from '@/configs/site';
+// Removed AuthSessionProvider import
 import { env } from '@/env.mjs';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';

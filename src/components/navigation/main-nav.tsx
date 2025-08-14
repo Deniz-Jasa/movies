@@ -232,7 +232,7 @@ export function MainNav({ items }: MainNavProps) {
                 <Button 
                   variant="outline" 
                   onClick={handleLogout}
-                  className="rounded-full bg-[#111111] text-white font-[9pt] hover:bg-[#222222] border border-input"
+                  className="rounded-full bg-white text-black dark:bg-[#111111] dark:text-white font-[9pt] hover:bg-gray-100 dark:hover:bg-[#222222] border border-input"
                 >
                   Logout
                 </Button>
@@ -251,12 +251,14 @@ export function MainNav({ items }: MainNavProps) {
           containerClassName={cn(path === '/' ? 'hidden' : 'flex')}
         />
 
-        <div className="hidden md:flex gap-4">
-          <ThemeToggle />
+        <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary/80">
+            <ThemeToggle />
+          </div>
           <Button 
             variant="outline" 
             onClick={handleLogout} 
-            className="rounded-full bg-[#111111] text-white border border-input"
+            className="rounded-full bg-white text-black dark:bg-[#111111] dark:text-white hover:bg-gray-100 dark:hover:bg-[#222222] border border-input"
           >
             Logout
           </Button>

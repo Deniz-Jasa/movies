@@ -6,6 +6,7 @@ import { RequestType, type ShowRequest } from '@/enums/request-type';
 import MovieService from '@/services/MovieService';
 import { Genre } from '@/enums/genre';
 import SiteHeader from '@/components/main/site-header';
+import RecentlyWatched from '@/components/recently-watched';
 
 export const revalidate = 3600;
 
@@ -90,6 +91,7 @@ export default async function Home() {
       <h1 className="hidden">{h1}</h1>
       <div className="ml-[1%]">
         <Hero shows={allShows[0].shows} />
+        <RecentlyWatched />
         <ShowsContainer shows={allShows} />
         <br></br>
         <br></br>

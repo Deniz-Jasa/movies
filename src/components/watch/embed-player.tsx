@@ -19,6 +19,12 @@ function EmbedPlayer(props: EmbedPlayerProps) {
   }, []);
 
   const ref = React.useRef<HTMLIFrameElement>(null);
+  const [blockClicks, setBlockClicks] = React.useState(true);
+
+  React.useEffect(() => {
+    const t = window.setTimeout(() => setBlockClicks(false), 2500);
+    return () => window.clearTimeout(t);
+  }, []);
 
   const handleIframeLoaded = () => {
     if (!ref.current) {
@@ -36,13 +42,30 @@ function EmbedPlayer(props: EmbedPlayerProps) {
         position: 'absolute',
         backgroundColor: '#000',
       }}>
+      {blockClicks && (
+        <div
+          onClick={() => setBlockClicks(false)}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 2,
+            cursor: 'pointer',
+          }}
+          aria-hidden
+        />
+      )}
       <iframe
         ref={ref}
         width="100%"
         height="100%"
         allowFullScreen
+        sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
+        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
         style={{ opacity: 0 }}
-        referrerPolicy="no-referrer-when-downgrade"
+        referrerPolicy="no-referrer"
+        loading="eager"
+        title="embed-player"
+        aria-label="Video player"
       />
     </div>
   );

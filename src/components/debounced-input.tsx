@@ -64,14 +64,14 @@ export function DebouncedInput({
   };
 
   return (
-    <div className={cn('relative', containerClassName)}>
+    <div className={cn('relative h-10', open ? 'w-auto' : 'w-10', containerClassName)}>
       <Input
         ref={inputRef}
         id={id}
         type="text"
         className={cn(
           'h-auto py-[8.5px] pl-10 pr-4 text-[10pt] transition-all duration-300 ease-in-out',
-          open ? 'w-50 border md:w-52 lg:w-80' : 'w-0 border-none bg-transparent',
+          open ? 'w-50 border md:w-64 lg:w-96' : 'w-0 border-none bg-transparent',
           className
         )}
         defaultValue={value}
@@ -89,7 +89,7 @@ export function DebouncedInput({
           size="icon"
           className={cn(
             'absolute top-1/2 -translate-y-1/2',
-            open ? 'left-2' : 'left-[13px]',
+            open ? 'left-2' : 'left-1/2 -translate-x-1/2',
             'rounded-full'
           )}
           onClick={() => {
@@ -101,19 +101,13 @@ export function DebouncedInput({
         </Button>
       ) : (
         /* OPEN state */
-        <Button
-          id="close-search-btn"
-          aria-label="Close search"
-          variant="ghost"
-          size="icon"
-          className="absolute top-1/2 left-1 -translate-y-1/2 rounded-full"
-          onClick={() => {
-            inputRef.current?.focus();
-            onChangeStatusOpen(!open);
-          }}
+        <span
+          aria-hidden
+          className="absolute top-1/2 left-3 -translate-y-1/2 text-foreground/60 cursor-pointer"
+          onClick={() => onChangeStatusOpen(false)}
         >
-          <LucideSearch size={14} aria-hidden />
-        </Button>
+          <LucideSearch size={14} />
+        </span>
       )}
     </div>
   );

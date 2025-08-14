@@ -8,6 +8,9 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
+    JWT_SECRET: z.string().min(1),
+    POSTGRES_URL: z.string().min(1),
+    ALLOWED_EMAIL: z.string().email().optional(),
   },
 
   /**
@@ -44,6 +47,9 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_INSTAGRAM ?? 'https://instagram.com',
     NEXT_PUBLIC_YOUTUBE:
       process.env.NEXT_PUBLIC_YOUTUBE ?? 'https://youtube.com',
+    JWT_SECRET: process.env.JWT_SECRET,
+    POSTGRES_URL: process.env.POSTGRES_URL,
+    ALLOWED_EMAIL: process.env.ALLOWED_EMAIL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

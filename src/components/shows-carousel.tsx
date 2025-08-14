@@ -56,7 +56,7 @@ const ShowsCarousel = ({ title, shows }: ShowsCarouselProps) => {
           <h2 className="m-0 px-[4%] text-lg font-semibold text-foreground/80 transition-colors hover:text-foreground sm:text-xl 2xl:px-[60px]">
             {title ?? '-'}
           </h2>
-          <div className="relative w-full items-center justify-center overflow-hidden">
+          <div className="relative w-full items-center justify-center overflow-visible pt-2">
             <Button
               aria-label="Scroll to left"
               variant="ghost"
@@ -69,7 +69,7 @@ const ShowsCarousel = ({ title, shows }: ShowsCarouselProps) => {
             </Button>
             <div
               ref={showsRef}
-              className="no-scrollbar m-0 grid auto-cols-[calc(100%/3)] grid-flow-col overflow-x-auto overflow-y-hidden px-[4%] py-0 duration-500 ease-in-out sm:auto-cols-[25%] md:touch-pan-y lg:auto-cols-[20%] xl:auto-cols-[calc(100%/6)] 2xl:px-[60px]">
+              className="no-scrollbar m-0 grid auto-cols-[calc(100%/3)] grid-flow-col overflow-x-auto overflow-y-visible px-[4%] py-0 duration-500 ease-in-out sm:auto-cols-[25%] md:touch-pan-y lg:auto-cols-[20%] xl:auto-cols-[calc(100%/6)] 2xl:px-[60px]">
               {shows.map((show) => (
                 <ShowCard key={show.id} show={show} pathname={pathname} />
               ))}
@@ -105,7 +105,7 @@ export const ShowCard = ({
 
   return (
     // <picture className="relative aspect-[2/3] md:aspect-video">
-    <picture className="relative aspect-[2/3]">
+    <picture className="relative aspect-[2/3] z-10 will-change-transform">
       <a
         className="pointer-events-none"
         aria-hidden={false}
@@ -133,7 +133,7 @@ export const ShowCard = ({
             : '/images/grey-thumbnail.jpg'
         }
         alt={show.title ?? show.name ?? 'poster'}
-        className="h-[95%] w-[95%] cursor-pointer rounded-lg px-1 transition-all transform hover:scale-110 hover:shadow-lg"
+        className="h-[95%] w-[95%] cursor-pointer rounded-lg px-1 transition-transform hover:scale-110 hover:shadow-xl"
         style={{
           objectFit: 'cover',
         }}

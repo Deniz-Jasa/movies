@@ -43,7 +43,7 @@ const defaultOptions: Record<string, object> = {
   playerVars: {
     // https://developers.google.com/youtube/player_parameters
     rel: 0,
-    mute: isMobile() ? 1 : 0,
+    mute: 1,
     loop: 1,
     autoplay: 1,
     controls: 0,
@@ -65,9 +65,7 @@ const ShowModal = () => {
   const [trailer, setTrailer] = React.useState('');
   const [isPlaying, setPlaying] = React.useState(true);
   const [genres, setGenres] = React.useState<Genre[]>([]);
-  const [isMuted, setIsMuted] = React.useState<boolean>(
-    modalStore.firstLoad || IS_MOBILE,
-  );
+  const [isMuted, setIsMuted] = React.useState<boolean>(true);
   const [options, setOptions] =
     React.useState<Record<string, object>>(defaultOptions);
 
@@ -76,12 +74,10 @@ const ShowModal = () => {
 
   // get trailer and genres of show
   React.useEffect(() => {
-    if (modalStore.firstLoad || IS_MOBILE) {
-      setOptions((state: Record<string, object>) => ({
-        ...state,
-        playerVars: { ...state.playerVars, mute: 1 },
-      }));
-    }
+    setOptions((state: Record<string, object>) => ({
+      ...state,
+      playerVars: { ...state.playerVars, mute: 1 },
+    }));
     void handleGetData();
   }, []);
 
@@ -197,13 +193,10 @@ const ShowModal = () => {
               >
                 <Button
                   aria-label={`${isPlaying ? 'Pause' : 'Play'} show`}
-                  className="group h-auto rounded py-1.5"
+                  className="group h-auto rounded py-1.5 bg-white text-black hover:bg-gray-100 dark:bg-white dark:text-black"
                 >
                   <>
-                    <Icons.play
-                      className="mr-1.5 h-6 w-6 fill-current"
-                      aria-hidden="true"
-                    />
+                    <Icons.play className="mr-1.5 h-6 w-6" aria-hidden="true" />
                     Play
                   </>
                 </Button>
@@ -212,7 +205,7 @@ const ShowModal = () => {
             <Button
               aria-label={`${isMuted ? 'Unmute' : 'Mute'} video`}
               variant="ghost"
-              className="h-auto rounded-full bg-white dark:bg-neutral-800 p-1.5 opacity-50 ring-1 ring-slate-400 hover:bg-neutral-800 hover:opacity-100 hover:ring-white focus:ring-offset-0 dark:bg-neutral-800 dark:hover:bg-neutral-800"
+              className="h-auto rounded-full bg-white text-black dark:bg-neutral-800 dark:text-white p-1.5 opacity-70 ring-1 ring-slate-400 hover:opacity-100"
               onClick={handleChangeMute}
             >
               {isMuted ? (
